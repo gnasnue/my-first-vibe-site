@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모닝브루 | 망원동 동네 카페</title>
+<meta name="description" content="서울 망원동 골목 끝, 매일 아침 직접 내리는 핸드드립 커피와 당일 구운 수제 스콘. 혼자 와도 편한 1인 좌석이 있는 동네 카페 모닝브루.">
+<style>
+  :root {
+    --cream: #FFF8F0;
+    --warm-white: #FFFDFA;
+    --brown-dark: #4A3428;
+    --brown-mid: #7A5C46;
+    --brown-light: #B08968;
+    --accent: #D97B3F;
+    --accent-dark: #B85F2A;
+    --card-bg: #FFFFFF;
+    --border-soft: #EFE1D1;
+    --soft-yellow: #FFF6DC;
+    --soft-yellow-border: #F3E3AE;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+      "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+    background-color: var(--cream);
+    color: var(--brown-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header / Hero */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(180deg, #FFF8F0 0%, #FBEBDA 100%);
+    padding: 40px 20px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--brown-mid);
+    background: var(--warm-white);
+    border: 1px solid var(--border-soft);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--brown-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .hero p.tagline {
+    font-size: 18px;
+    color: var(--brown-mid);
+    max-width: 320px;
+    margin-bottom: 36px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: #FFFFFF;
+    box-shadow: 0 6px 16px rgba(217, 123, 63, 0.35);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-secondary {
+    background-color: var(--warm-white);
+    color: var(--brown-dark);
+    border: 1.5px solid var(--brown-light);
+  }
+
+  .hero-scroll {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--brown-light);
+  }
+
+  /* Section common */
+  section {
+    padding: 64px 0;
+  }
+
+  .section-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--brown-dark);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--brown-mid);
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  /* Menu cards */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  @media (min-width: 420px) {
+    .menu-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .menu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(74, 52, 40, 0.06);
+  }
+
+  .menu-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .menu-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 6px;
+  }
+
+  .menu-price {
+    font-size: 14px;
+    color: var(--accent-dark);
+    font-weight: 700;
+  }
+
+  .menu-card.featured {
+    border: 1.5px solid var(--accent);
+    position: relative;
+  }
+
+  .menu-card.featured::before {
+    content: "대표메뉴";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  /* Features */
+  .features {
+    background: var(--warm-white);
+  }
+
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .feature-emoji {
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .feature-text-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 4px;
+  }
+
+  .feature-text-desc {
+    font-size: 13.5px;
+    color: var(--brown-mid);
+  }
+
+  /* Location & Hours */
+  .info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 14px rgba(74, 52, 40, 0.06);
+  }
+
+  .info-row {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .info-row:last-child {
+    border-bottom: none;
+  }
+
+  .info-row.hours-highlight {
+    background: var(--soft-yellow);
+    border: 1px solid var(--soft-yellow-border);
+    border-radius: 14px;
+    padding: 24px 20px;
+    margin: 8px 0;
+  }
+
+  .info-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+  }
+
+  .info-label {
+    font-size: 12.5px;
+    color: var(--brown-light);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .info-value {
+    font-size: 15.5px;
+    color: var(--brown-dark);
+    font-weight: 600;
+  }
+
+  .info-value.closed {
+    color: var(--accent-dark);
+  }
+
+  .map-note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--brown-mid);
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  /* Contact CTA */
+  .cta {
+    background: linear-gradient(180deg, #4A3428 0%, #3A281E 100%);
+    color: #FFF8F0;
+    text-align: center;
+    padding: 56px 0 64px;
+  }
+
+  .cta h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .cta p {
+    font-size: 15px;
+    color: #D9C4B0;
+    margin-bottom: 32px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-cta-call {
+    background-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(217, 123, 63, 0.45);
+  }
+
+  .btn-cta-insta {
+    background: transparent;
+    border: 1.5px solid #B08968;
+    color: #FFF8F0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 40px;
+    font-size: 12.5px;
+    color: var(--brown-light);
+    background: #3A281E;
+  }
+
+  /* Fixed bottom bar for mobile — always-visible reservation/contact button */
+  .sticky-bar {
+    position: fixed;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    background: var(--warm-white);
+    border: 1px solid var(--border-soft);
+    border-radius: 18px;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(74, 52, 40, 0.25);
+  }
+
+  .sticky-bar .btn {
+    padding: 14px 10px;
+    font-size: 15px;
+  }
+
+  .sticky-bar .btn-primary {
+    flex: 1.4;
+    background: linear-gradient(135deg, #E2803F 0%, #C85A22 100%);
+    box-shadow: 0 6px 18px rgba(200, 90, 34, 0.5);
+  }
+
+  .sticky-bar .btn-secondary {
+    flex: 1;
+  }
+
+  body {
+    padding-bottom: 100px; /* space for floating sticky bar */
+  }
+
+  /* Wider screens: keep content centered and readable */
+  @media (min-width: 600px) {
+    .hero h1 {
+      font-size: 56px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- 1. Hero -->
+  <header class="hero" id="top">
+    <span class="hero-badge">서울 망원동 · 골목 끝 작은 카페</span>
+    <h1>모닝브루</h1>
+    <p class="tagline">매일 아침 마음을 담아 내린 커피 한 잔과<br>당신만을 위한 편안한 자리를 준비했습니다</p>
+    <div class="hero-buttons">
+      <a href="tel:02-123-4567" class="btn btn-primary">📞 편하게 전화 주세요</a>
+      <a href="#location" class="btn btn-secondary">📍 오시는 길 확인하기</a>
+    </div>
+    <div class="hero-scroll">↓ 정성으로 준비한 메뉴를 소개합니다</div>
+  </header>
+
+  <!-- 2. Menu -->
+  <section id="menu">
+    <div class="container">
+      <h2 class="section-title">대표 메뉴</h2>
+      <p class="section-sub">정성을 다해, 매일 아침 신선하게 준비합니다</p>
+      <div class="menu-grid">
+        <div class="menu-card featured">
+          <div class="menu-icon">☕</div>
+          <div class="menu-name">핸드드립 커피</div>
+          <div class="menu-price">5,500원</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-icon">🫘</div>
+          <div class="menu-name">오늘의 원두</div>
+          <div class="menu-price">4,500원</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-icon">🥐</div>
+          <div class="menu-name">수제 스콘</div>
+          <div class="menu-price">3,500원</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-icon">🍊</div>
+          <div class="menu-name">계절 과일 에이드</div>
+          <div class="menu-price">6,000원</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">모닝브루만의 특징</h2>
+      <p class="section-sub">작지만, 마음을 다해 채운 공간입니다</p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-emoji">☕</div>
+          <div>
+            <div class="feature-text-title">매일 아침 직접 내리는 핸드드립</div>
+            <div class="feature-text-desc">원두 본연의 향과 맛을 살려, 한 잔 한 잔 정성껏 내려드립니다.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-emoji">🥐</div>
+          <div>
+            <div class="feature-text-title">당일 구운 수제 스콘</div>
+            <div class="feature-text-desc">이른 아침 직접 구워내는 따뜻하고 신선한 스콘을 맛보실 수 있어요.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-emoji">🪑</div>
+          <div>
+            <div class="feature-text-title">혼자 와도 편한 1인 좌석</div>
+            <div class="feature-text-desc">혼자 오셔도 눈치 보지 않고, 편안하게 머무르실 수 있도록 준비했습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Location & Hours -->
+  <section id="location">
+    <div class="container">
+      <h2 class="section-title">위치 & 영업시간</h2>
+      <p class="section-sub">망원역에서 걸어서 6분, 골목 끝에서 기다리고 있어요</p>
+      <div class="info-card">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">위치</div>
+            <div class="info-value">서울 망원동 골목 끝<br>망원역 2번 출구 도보 6분</div>
+          </div>
+        </div>
+        <div class="info-row hours-highlight">
+          <div class="info-icon">🕗</div>
+          <div>
+            <div class="info-label">영업시간</div>
+            <div class="info-value">화~일 08:00 ~ 20:00</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🚫</div>
+          <div>
+            <div class="info-label">휴무일</div>
+            <div class="info-value closed">매주 월요일</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-note">💡 망원역 2번 출구에서 나와 도보 6분, 골목 끝까지 편하게 오시면 저희가 반갑게 맞이해드릴게요.</div>
+    </div>
+  </section>
+
+  <!-- 4. Contact CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>언제든 편하게 연락 주세요</h2>
+      <p>예약이나 궁금하신 점은 전화와 인스타그램으로 남겨주시면, 정성껏 답해드릴게요.</p>
+      <div class="cta-buttons">
+        <a href="tel:02-123-4567" class="btn btn-cta-call">📞 02-123-4567 전화하기</a>
+        <a href="https://www.instagram.com/morningbrew_official" target="_blank" rel="noopener noreferrer" class="btn btn-cta-insta">📷 @morningbrew_official</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 모닝브루 (Morning Brew). All rights reserved.
+  </footer>
+
+  <!-- Sticky mobile contact bar -->
+  <div class="sticky-bar">
+    <a href="tel:02-123-4567" class="btn btn-primary">📞 예약·문의하기</a>
+    <a href="https://www.instagram.com/morningbrew_official" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">📷 인스타그램</a>
+  </div>
+
+</body>
+</html>
